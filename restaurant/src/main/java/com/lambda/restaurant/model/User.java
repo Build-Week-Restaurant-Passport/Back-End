@@ -27,10 +27,13 @@ public class User extends Auditable
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @OneToMany(mappedBy = "user",
-               cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
-    private List<UserRoles> userRoles = new ArrayList<>();
+//    @OneToMany(mappedBy = "user",
+//               cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties("user")
+//    private List<UserRoles> userRoles = new ArrayList<>();
+@Column(nullable = false,
+        unique = true)
+private String email;
 
 
 
@@ -38,15 +41,12 @@ public class User extends Auditable
     {
     }
 
-    public User(String username, String password, List<UserRoles> userRoles)
+    public User(String username, String password,String email )
     {
         setUsername(username);
         setPassword(password);
-        for (UserRoles ur : userRoles)
-        {
-            ur.setUser(this);
-        }
-        this.userRoles = userRoles;
+        setEmail(email);
+
     }
 
     public long getUserid()
@@ -85,26 +85,34 @@ public class User extends Auditable
         this.password = password;
     }
 
-    public List<UserRoles> getUserRoles()
-    {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<UserRoles> userRoles)
-    {
-        this.userRoles = userRoles;
-    }
+//    public List<UserRoles> getUserRoles()
+//    {
+//        return userRoles;
+//    }
+//
+//    public void setUserRoles(List<UserRoles> userRoles)
+//    {
+//        this.userRoles = userRoles;
+//    }
 
     public List<SimpleGrantedAuthority> getAuthority()
     {
         List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
 
-        for (UserRoles r : this.userRoles)
-        {
-            String myRole = "ROLE_" + r.getRole().getName().toUpperCase();
-            rtnList.add(new SimpleGrantedAuthority(myRole));
-        }
+//        for (UserRoles r : this.userRoles)
+//        {
+//            String myRole = "ROLE_" + r.getRole().getName().toUpperCase();
+//            rtnList.add(new SimpleGrantedAuthority(myRole));
+//        }
 
         return rtnList;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

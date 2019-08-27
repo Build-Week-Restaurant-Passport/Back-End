@@ -2,7 +2,6 @@ package com.lambda.restaurant.service;
 
 import com.lambda.restaurant.exceptions.ResourceNotFoundException;
 import com.lambda.restaurant.model.User;
-import com.lambda.restaurant.model.UserRoles;
 import com.lambda.restaurant.repo.RoleRepository;
 import com.lambda.restaurant.repo.UserRepository;
 
@@ -72,12 +71,12 @@ public class UserServiceImpl implements UserDetailsService, UserService
         newUser.setUsername(user.getUsername());
         newUser.setPasswordNoEncrypt(user.getPassword());
 
-        ArrayList<UserRoles> newRoles = new ArrayList<>();
-        for (UserRoles ur : user.getUserRoles())
-        {
-            newRoles.add(new UserRoles(newUser, ur.getRole()));
-        }
-        newUser.setUserRoles(newRoles);
+//        ArrayList<UserRoles> newRoles = new ArrayList<>();
+//        for (UserRoles ur : user.getUserRoles())
+//        {
+//            newRoles.add(new UserRoles(newUser, ur.getRole()));
+//        }
+//        newUser.setUserRoles(newRoles);
 
 
         return userrepos.save(newUser);
@@ -105,19 +104,19 @@ public class UserServiceImpl implements UserDetailsService, UserService
                     currentUser.setPasswordNoEncrypt(user.getPassword());
                 }
 
-                if (user.getUserRoles().size() > 0)
-                {
-                    // with so many relationships happening, I decided to go
-                    // with old school queries
-                    // delete the old ones
-                    rolerepos.deleteUserRolesByUserId(currentUser.getUserid());
-
-                    // add the new ones
-                    for (UserRoles ur : user.getUserRoles())
-                    {
-                        rolerepos.insertUserRoles(id, ur.getRole().getRoleid());
-                    }
-                }
+//                if (user.getUserRoles().size() > 0)
+//                {
+//                    // with so many relationships happening, I decided to go
+//                    // with old school queries
+//                    // delete the old ones
+//                    rolerepos.deleteUserRolesByUserId(currentUser.getUserid());
+//
+//                    // add the new ones
+//                    for (UserRoles ur : user.getUserRoles())
+//                    {
+//                        rolerepos.insertUserRoles(id, ur.getRole().getRoleid());
+//                    }
+//                }
 
 
 
