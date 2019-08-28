@@ -27,26 +27,42 @@ public class User extends Auditable
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-//    @OneToMany(mappedBy = "user",
-//               cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties("user")
-//    private List<UserRoles> userRoles = new ArrayList<>();
-@Column(nullable = false,
-        unique = true)
-private String email;
-
+    @OneToMany(mappedBy = "user",
+               cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<UserRoles> userRoles = new ArrayList<>();
 
 
     public User()
     {
     }
+//    public User(String username, String password, List<UserRoles> userRoles)
+//    {
+//        setUsername(username);
+//        setPassword(password);
+//        if(userRoles == null){
+//            Role r2 = new Role("user");
+//            ArrayList<UserRoles> users = new ArrayList<>();
+//            users.add(new UserRoles(new User(),r2));
+//        }else{
+//            for (UserRoles ur : userRoles)
+//            {
+//                ur.setUser(this);
+//            }
+//            this.userRoles = userRoles;
+//        }
+//    }
 
-    public User(String username, String password,String email )
+    public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
         setPassword(password);
-        setEmail(email);
 
+        for (UserRoles ur : userRoles)
+        {
+            ur.setUser(this);
+        }
+        this.userRoles = userRoles;
     }
 
     public long getUserid()
@@ -85,34 +101,33 @@ private String email;
         this.password = password;
     }
 
-//    public List<UserRoles> getUserRoles()
-//    {
-//        return userRoles;
-//    }
-//
-//    public void setUserRoles(List<UserRoles> userRoles)
-//    {
-//        this.userRoles = userRoles;
-//    }
+    public List<UserRoles> getUserRoles()
+    {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRoles> userRoles)
+    {
+        this.userRoles = userRoles;
+    }
 
     public List<SimpleGrantedAuthority> getAuthority()
     {
+
         List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
 
-//        for (UserRoles r : this.userRoles)
-//        {
-//            String myRole = "ROLE_" + r.getRole().getName().toUpperCase();
-//            rtnList.add(new SimpleGrantedAuthority(myRole));
-//        }
+        for (UserRoles r : this.userRoles)
+        {
+            String myRole = "ROLE_" + r.getRole().getName().toUpperCase();
+            rtnList.add(new SimpleGrantedAuthority(myRole));
+        }
 
         return rtnList;
     }
+//
+//    public SimpleGrantedAuthority getAuthority1(){
+////        String myRole = "ROLE_" + "";
+//        return new SimpleGrantedAuthority("ROLE_USER");
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    }
 }

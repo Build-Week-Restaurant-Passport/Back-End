@@ -18,12 +18,17 @@ public class Role extends Auditable
             unique = true)
     private String name;
 
-//    @OneToMany(mappedBy = "role",
-//               cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties("role")
-//    private List<UserRoles> userRoles = new ArrayList<>();
+    @OneToMany(mappedBy = "role",
+               cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("role")
+    private List<UserRoles> userRoles = new ArrayList<>();
 
     public Role() {
+    }
+
+    public Role(String name, List<UserRoles> userRoles) {
+        this.name = name;
+        this.userRoles = userRoles;
     }
 
     public Role(String name)
@@ -50,14 +55,14 @@ public class Role extends Auditable
     {
         this.name = name;
     }
-//
-//    public List<UserRoles> getUserRoles()
-//    {
-//        return userRoles;
-//    }
-//
-//    public void setUserRoles(List<UserRoles> userRoles)
-//    {
-//        this.userRoles = userRoles;
-//    }
+
+    public List<UserRoles> getUserRoles()
+    {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRoles> userRoles)
+    {
+        this.userRoles = userRoles;
+    }
 }

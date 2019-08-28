@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 //@Entity
 //@Table(name = "restaurant")
-//public class Restaurant {
-//
-//
-//}
+public class Restaurant {
+
+
+}

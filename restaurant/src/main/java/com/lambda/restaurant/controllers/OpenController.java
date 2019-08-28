@@ -43,7 +43,7 @@ public class OpenController
 
         ArrayList<UserRoles> newRoles = new ArrayList<>();
         newRoles.add(new UserRoles(newuser, roleService.findByName("user")));
-//        newuser.setUserRoles(newRoles);
+        newuser.setUserRoles(newRoles);
 
         newuser = userService.save(newuser);
 
