@@ -2,16 +2,10 @@ package com.lambda.restaurant.service;
 
 import com.lambda.restaurant.exceptions.ResourceNotFoundException;
 import com.lambda.restaurant.model.NewUse;
-import com.lambda.restaurant.model.UserRoles;
-import com.lambda.restaurant.repo.newUseRepo;
+import com.lambda.restaurant.repo.NewUseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +15,7 @@ public class newuseSerImpl implements newuseSer{
 
 
         @Autowired
-        private newUseRepo userrepo;
+        private NewUseRepo userrepo;
 
 //    @Transactional
 //    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
