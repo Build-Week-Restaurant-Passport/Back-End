@@ -22,7 +22,6 @@ import java.util.List;
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService
 {
-
     @Autowired
     private UserRepository userrepos;
 

@@ -2,6 +2,7 @@ package com.lambda.restaurant.service;
 
 import com.lambda.restaurant.exceptions.ResourceNotFoundException;
 import com.lambda.restaurant.model.NewUse;
+import com.lambda.restaurant.model.UserRoles;
 import com.lambda.restaurant.repo.newUseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,17 @@ public class newuseSerImpl implements newuseSer{
 
         @Autowired
         private newUseRepo userrepo;
+
+//    @Transactional
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
+//    {
+//        NewUse user = userrepo.findByEmail(email);
+//        if (user == null)
+//        {
+//            throw new UsernameNotFoundException("Invalid username or password.");
+//        }
+//        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.getAuthority());
+//    }
 
 
 
@@ -54,8 +66,17 @@ public class newuseSerImpl implements newuseSer{
         public NewUse save(NewUse newUser){
 
             NewUse user = new NewUse();
+            user.setFname(newUser.getFname());
+            user.setLname(newUser.getLname());
             user.setEmail(newUser.getEmail());
             user.setPassword(newUser.getPassword());
+
+//            ArrayList<UserRoles> newRoles = new ArrayList<>();
+//            for (UserRoles ur : user.getUserRoles()) {
+//
+//                newRoles.add(new UserRoles(newUser, ur.getRole()));
+//            }
+//            newUser.setUserRoles(newRoles);
 
             return userrepo.save(user);
 

@@ -1,8 +1,8 @@
 package com.lambda.restaurant;
 
-import com.lambda.restaurant.model.Role;
-import com.lambda.restaurant.model.User;
-import com.lambda.restaurant.model.UserRoles;
+import com.lambda.restaurant.model.*;
+import com.lambda.restaurant.service.CitySer;
+import com.lambda.restaurant.service.newuseSer;
 import com.lambda.restaurant.service.RoleService;
 import com.lambda.restaurant.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,12 @@ public class SeedData implements CommandLineRunner {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    newuseSer user;
+
+    @Autowired
+    CitySer city;
 
     @Override
     public void run(String[] args) throws Exception
@@ -50,13 +56,22 @@ public class SeedData implements CommandLineRunner {
 
         users.add(new UserRoles(new User(),r2));
 
+
+
+        NewUse nu1 = new NewUse("adname","adlast","emails","pass");
+        user.save(nu1);
+
         userService.save(u2);
         userService.save(u1);
         userService.save(u3);
 
-        System.out.println(u3.getAuthority());
-        System.out.println();
+//        System.out.println(u3.getAuthority());
+//        System.out.println();
 
+        City cin = new City("cin");
 
+        city.save(cin);
+
+//
     }
 }
