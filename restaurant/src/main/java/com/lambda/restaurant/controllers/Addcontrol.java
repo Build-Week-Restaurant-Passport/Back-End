@@ -46,12 +46,12 @@ public class Addcontrol {
     @PutMapping(value = "/city/{id}")
     public ResponseEntity<?> updateUser(HttpServletRequest request,
                                         @RequestBody
-                                                User updateUser,
+                                                City updatecity,
                                         @PathVariable
                                                 long id)
     {
 
-        cityser.update(updateUser, id);
+        cityser.update(updatecity, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

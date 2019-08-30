@@ -61,8 +61,12 @@ public class CitySerImpl implements CitySer{
     @Override
     public City update(City user, long id) {
 
-        City current = new City(){}
+        City current = new City();
+            if(id == current.getCityid()) {
+                current.setCityname(user.getCityname());
 
+            }
+        return cityRepo.save(current);
     }
 
 

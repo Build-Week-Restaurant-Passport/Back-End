@@ -17,6 +17,14 @@ public class City {
     public City() {
     }
 
+    public long getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(long cityid) {
+        this.cityid = cityid;
+    }
+
     public City(String cityname) {
         this.cityname = cityname;
     }
