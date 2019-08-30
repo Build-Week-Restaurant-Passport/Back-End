@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 @Service(value = "city")
@@ -47,6 +48,7 @@ public class CitySerImpl implements CitySer{
     @Override
     public void delete(long id)
     {
+
         if (cityRepo.findById(id).isPresent())
         {
             cityRepo.deleteById(id);
@@ -54,14 +56,14 @@ public class CitySerImpl implements CitySer{
         {
             throw new ResourceNotFoundException(Long.toString(id));
         }
-//        return cityRepo.delete();
     }
 
     @Transactional
     @Override
     public City update(City user, long id) {
 
-        City current = new City();
+        City current = cityRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
             if(id == current.getCityid()) {
                 current.setCityname(user.getCityname());
 
