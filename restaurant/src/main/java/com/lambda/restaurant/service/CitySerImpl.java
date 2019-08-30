@@ -64,9 +64,9 @@ public class CitySerImpl implements CitySer{
 
         City current = cityRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
-            if(id == current.getCityid()) {
+            if (user.getCityname() != null)
+            {
                 current.setCityname(user.getCityname());
-
             }
         return cityRepo.save(current);
     }
