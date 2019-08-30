@@ -1,11 +1,11 @@
 package com.lambda.restaurant.service;
 
 import com.lambda.restaurant.exceptions.ResourceNotFoundException;
+import com.lambda.restaurant.model.Role;
 import com.lambda.restaurant.model.User;
 import com.lambda.restaurant.model.UserRoles;
 import com.lambda.restaurant.repo.RoleRepository;
 import com.lambda.restaurant.repo.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +22,6 @@ import java.util.List;
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService
 {
-
     @Autowired
     private UserRepository userrepos;
 
@@ -71,13 +70,13 @@ public class UserServiceImpl implements UserDetailsService, UserService
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPasswordNoEncrypt(user.getPassword());
+//        if (newUser.){}
+             ArrayList<UserRoles> newRoles = new ArrayList<>();
+             for (UserRoles ur : user.getUserRoles()) {
 
-        ArrayList<UserRoles> newRoles = new ArrayList<>();
-        for (UserRoles ur : user.getUserRoles())
-        {
-            newRoles.add(new UserRoles(newUser, ur.getRole()));
-        }
-        newUser.setUserRoles(newRoles);
+                 newRoles.add(new UserRoles(newUser, ur.getRole()));
+             }
+             newUser.setUserRoles(newRoles);
 
 
         return userrepos.save(newUser);
@@ -118,7 +117,6 @@ public class UserServiceImpl implements UserDetailsService, UserService
                         rolerepos.insertUserRoles(id, ur.getRole().getRoleid());
                     }
                 }
-
 
 
                 return userrepos.save(currentUser);

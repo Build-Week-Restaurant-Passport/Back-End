@@ -33,15 +33,31 @@ public class User extends Auditable
     private List<UserRoles> userRoles = new ArrayList<>();
 
 
-
     public User()
     {
     }
+//    public User(String username, String password, List<UserRoles> userRoles)
+//    {
+//        setUsername(username);
+//        setPassword(password);
+////        if(userRoles == null){
+////            Role r2 = new Role("user");
+////            ArrayList<UserRoles> users = new ArrayList<>();
+////            users.add(new UserRoles(new User(),r2));
+////        }else{
+//            for (UserRoles ur : userRoles)
+//            {
+//                ur.setUser(this);
+//            }
+//            this.userRoles = userRoles;
+////        }
+//    }
 
     public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
         setPassword(password);
+
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
@@ -97,6 +113,7 @@ public class User extends Auditable
 
     public List<SimpleGrantedAuthority> getAuthority()
     {
+
         List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
 
         for (UserRoles r : this.userRoles)
@@ -107,4 +124,10 @@ public class User extends Auditable
 
         return rtnList;
     }
+//
+//    public SimpleGrantedAuthority getAuthority1(){
+////        String myRole = "ROLE_" + "";
+//        return new SimpleGrantedAuthority("ROLE_USER");
+
+//    }
 }

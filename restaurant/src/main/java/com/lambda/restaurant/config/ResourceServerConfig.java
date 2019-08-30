@@ -2,6 +2,7 @@ package com.lambda.restaurant.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -19,6 +20,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
     {
         resources.resourceId(RESOURCE_ID).stateless(false);
     }
+
+
 
     @Override
     public void configure(HttpSecurity http) throws Exception
@@ -43,5 +46,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         // http.requiresChannel().anyRequest().requiresSecure();
         http.csrf().disable();
         http.headers().frameOptions().disable();
+
+        http.authorizeRequests().antMatchers("/group/add").permitAll();
     }
+
+
 }

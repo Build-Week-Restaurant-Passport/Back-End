@@ -1,5 +1,6 @@
 package com.lambda.restaurant.controllers;
 
+
 import com.lambda.restaurant.model.User;
 import com.lambda.restaurant.service.UserService;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController
 {
-    private static final Logger logger = LoggerFactory.getLogger(RolesController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -65,7 +66,7 @@ public class UserController
     }
 
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user",
                  consumes = {"application/json"},
                  produces = {"application/json"})
@@ -86,6 +87,8 @@ public class UserController
     }
 
 
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping(value = "/user/{id}")
     public ResponseEntity<?> updateUser(HttpServletRequest request,
                                         @RequestBody

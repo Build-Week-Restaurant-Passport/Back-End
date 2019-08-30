@@ -22,7 +22,8 @@ import javax.annotation.Resource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
 
-    @Resource(name = "userService")
+//    @Resource(name = "userService")
+    @Resource(name = "useSer")
     private UserDetailsService userDetailsService;
 
     @Override
@@ -49,4 +50,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         return new BCryptPasswordEncoder();
     }
+
+    //
+
+//    @Resource(name = "useSer")
+//    private UserDetailsSer userDetailsSer;
+
+
+
+//    @Autowired
+//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception
+//    {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+//    }
+//
+//    @Bean
+//    public TokenStore tokenStore()
+//    {
+//        return new InMemoryTokenStore();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder encoder()
+//    {
+//        return new BCryptPasswordEncoder();
+//    }
 }
