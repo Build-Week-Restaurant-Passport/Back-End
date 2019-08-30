@@ -1,9 +1,13 @@
 package com.lambda.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "newuser")
@@ -12,10 +16,12 @@ public class NewUse {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
 
-    @Column(nullable = false)
+    @Column(nullable = false,
+            unique = false)
     private String fname;
 
-    @Column(nullable = false)
+    @Column(nullable = false,
+            unique = false)
     private String lname;
 
 
@@ -27,23 +33,28 @@ public class NewUse {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+//    @OneToMany(mappedBy = "user",
+//            cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties("user")
+//    private List userRoles = new ArrayList<>();
+
 
 
 
     public NewUse() {
     }
 
-//    public NewUse(String email, String password) {
-//        this.email = email;
-//        this.password = password;
-//    }
+
 
 
     public NewUse(String fname, String lname, String email, String password) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
-        this.password = password;
+        setPassword(password);
+//        List userRoles = new ArrayList();
+//        userRoles.add(getAuthority());
+        getAuthority();
     }
 
     public long getUserid() {
@@ -70,11 +81,11 @@ public class NewUse {
         this.lname = lname;
     }
 
-    public String getEmail() {
+    public String getUsername() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setUsername(String email) {
         this.email = email;
     }
 
@@ -82,13 +93,46 @@ public class NewUse {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password)
+    {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
-//    public void setPassword(String password)
-//    {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        this.password = passwordEncoder.encode(password);
+    public void setPasswordNoEncrypt(String password)
+    {
+        this.password = password;
+    }
+//
+
+//    public String getUserRole() {
+//        return userRole;
+//    }
+//
+//    public void setUserRole(String userRole) {
+//        this.userRole = userRole;
+//    }
+
+    //
+    public List<SimpleGrantedAuthority> getAuthority()
+    {
+
+        List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
+
+//        for (UserRoles r : this.userRoles)
+//        {
+//            String myRole = "ROLE_" + r.getRole().getName().toUpperCase();
+        rtnList.add(new SimpleGrantedAuthority("ROLE_USER"));
+//        }
+
+        return rtnList;
+    }
+
+//    public List getUserRoles() {
+//        return userRoles;
+//    }
+//
+//    public void setUserRoles(List userRoles) {
+//        this.userRoles = userRoles;
 //    }
 }

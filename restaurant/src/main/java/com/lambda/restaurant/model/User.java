@@ -40,17 +40,17 @@ public class User extends Auditable
 //    {
 //        setUsername(username);
 //        setPassword(password);
-//        if(userRoles == null){
-//            Role r2 = new Role("user");
-//            ArrayList<UserRoles> users = new ArrayList<>();
-//            users.add(new UserRoles(new User(),r2));
-//        }else{
+////        if(userRoles == null){
+////            Role r2 = new Role("user");
+////            ArrayList<UserRoles> users = new ArrayList<>();
+////            users.add(new UserRoles(new User(),r2));
+////        }else{
 //            for (UserRoles ur : userRoles)
 //            {
 //                ur.setUser(this);
 //            }
 //            this.userRoles = userRoles;
-//        }
+////        }
 //    }
 
     public User(String username, String password, List<UserRoles> userRoles)

@@ -68,7 +68,7 @@ public class SeedData implements CommandLineRunner {
 //        System.out.println(u3.getAuthority());
 //        System.out.println();
 
-        City cin = new City("cin");
+        City cin = new City("Chicago");
 
         city.save(cin);
 

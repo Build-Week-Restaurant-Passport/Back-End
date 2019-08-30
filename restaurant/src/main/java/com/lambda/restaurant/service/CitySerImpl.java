@@ -1,5 +1,6 @@
 package com.lambda.restaurant.service;
 
+import com.lambda.restaurant.exceptions.ResourceNotFoundException;
 import com.lambda.restaurant.model.City;
 import com.lambda.restaurant.repo.CityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class CitySerImpl implements CitySer{
         return list;
     }
 
+    public City findCityId(long id) throws ResourceNotFoundException
+    {
+        return cityRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
+    }
+
     @Transactional
     @Override
     public City save( City city){
@@ -37,5 +43,28 @@ public class CitySerImpl implements CitySer{
 
         return cityRepo.save(newcity);
     }
+
+    @Override
+    public void delete(long id)
+    {
+        if (cityRepo.findById(id).isPresent())
+        {
+            cityRepo.deleteById(id);
+        } else
+        {
+            throw new ResourceNotFoundException(Long.toString(id));
+        }
+//        return cityRepo.delete();
+    }
+
+    @Transactional
+    @Override
+    public City update(City user, long id) {
+
+        City current = new City(){}
+
+    }
+
+
 
 }

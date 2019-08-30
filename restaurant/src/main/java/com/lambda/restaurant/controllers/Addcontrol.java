@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,18 @@ public class Addcontrol {
     @PostMapping("/city/add")
     City newc(@RequestBody City newc){
         return cityser.save(newc);
+    }
+
+    @PutMapping(value = "/city/{id}")
+    public ResponseEntity<?> updateUser(HttpServletRequest request,
+                                        @RequestBody
+                                                User updateUser,
+                                        @PathVariable
+                                                long id)
+    {
+
+        cityser.update(updateUser, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

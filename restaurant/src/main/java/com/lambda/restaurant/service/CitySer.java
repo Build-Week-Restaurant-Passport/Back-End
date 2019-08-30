@@ -8,7 +8,15 @@ import java.util.List;
 
 public interface CitySer {
     List<City> findAll();
+
+    City findCityId(long id);
+
     City save(City city);
+
+    void delete(long id);
+
+    City update (City city,long id);
+
 
 //    ArrayList<City> getcitycount();
 }
