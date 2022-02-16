@@ -2,6 +2,7 @@ package com.lambda.restaurant.controllers;
 
 import com.lambda.restaurant.model.City;
 import com.lambda.restaurant.model.NewUse;
+import com.lambda.restaurant.repo.CityRepo;
 import com.lambda.restaurant.service.CitySer;
 import com.lambda.restaurant.service.newuseSer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class Addcontrol {
 
     @Autowired
     private CitySer cityser;
+
 
 //    @GetMapping(value = "/city",
 //            produces = {"application/json"})
@@ -61,6 +63,17 @@ public class Addcontrol {
     NewUse newuser(@RequestBody NewUse newuser){
         return useser.save(newuser);
     }
+
+
+    @DeleteMapping("/delete/city/{id}")
+    public ResponseEntity<?> deletecity (
+            @PathVariable
+                    long id)
+    {
+        cityser.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/delete/{id}")
     void deleteuser(@PathVariable Long id){

@@ -48,6 +48,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         http.headers().frameOptions().disable();
 
         http.authorizeRequests().antMatchers("/group/add").permitAll();
+        http.authorizeRequests().antMatchers("/group/delete/city/{id}").permitAll();
     }
 
 
